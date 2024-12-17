@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0364929ebe6ca704d8ccdfa05ddfa7df, type: 3}
+  m_Name: Sleeping_Quarters
+  m_EditorClassIdentifier: 
+  id: sleeping_quarters
+  branches:
+  - {fileID: 11400000, guid: 235e0862b60198d4fbf62b65133b15bd, type: 2}
+  minSize: 1
+  maxSize: 3
