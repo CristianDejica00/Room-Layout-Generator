@@ -8,4 +8,5 @@ public class RoomType : ScriptableObject {
     public RoomType[] branches;
     public int minSize;
     public int maxSize;
+    public Color lightColor;
 }

@@ -14,17 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: hallway
   branches:
-  - {fileID: 11400000, guid: 67bd314d20e00a6449704ed91f46837f, type: 2}
-  - {fileID: 11400000, guid: 67adbe0501a17bf42876f4bd17d68c7b, type: 2}
-  - {fileID: 11400000, guid: 82c75a9f0a67c2843aca14c86896a366, type: 2}
-  - {fileID: 11400000, guid: ce34eecce62b95645b6d08bb97f8e3ce, type: 2}
-  - {fileID: 11400000, guid: 235e0862b60198d4fbf62b65133b15bd, type: 2}
-  - {fileID: 11400000, guid: 3572af541657a0e43acd54812a17327e, type: 2}
-  - {fileID: 11400000, guid: 8611ba3f5a4d6bf49ae1096ed581e71c, type: 2}
-  - {fileID: 11400000, guid: a095904487d94c24fa2cb6680e0f65d5, type: 2}
-  - {fileID: 11400000, guid: 36aceb38d8fc8ad439ec67610cbbe53f, type: 2}
-  - {fileID: 11400000, guid: c7a9b73170b583c42a59c1b83f1c291f, type: 2}
-  - {fileID: 11400000, guid: 1c41d5b820601df40878f08c0fcffe3c, type: 2}
-  - {fileID: 11400000, guid: 4ae985452c39e6647809da86c1b787a8, type: 2}
+  - {fileID: 11400000, guid: afe8c049965f5eb47a30be0c45e6324d, type: 2}
+  - {fileID: 11400000, guid: 915ea746108969b48b8d90c029490d7f, type: 2}
+  - {fileID: 11400000, guid: 05896d782719c5644a0bdb1253f00851, type: 2}
+  - {fileID: 11400000, guid: 445d193d02963a843bb00658a5d02f18, type: 2}
+  - {fileID: 11400000, guid: 8b27296734261f6488351bb2dc33d1cb, type: 2}
+  - {fileID: 11400000, guid: c987317ab602c5747a77366b8611b592, type: 2}
+  - {fileID: 11400000, guid: 64f6251916a2804478982cbd5819b301, type: 2}
+  - {fileID: 11400000, guid: 76bbb419761bc8f4f8754741e4f732f9, type: 2}
+  - {fileID: 11400000, guid: 68d34e631ab2e2a45a8360c15e2f792d, type: 2}
+  - {fileID: 11400000, guid: 5c6796315c75070408b3480dbc3c117d, type: 2}
+  - {fileID: 11400000, guid: 15dd78e892c695c41bd60f8c6d4d2e9d, type: 2}
+  - {fileID: 11400000, guid: bf47e589320aa1040bdd8b77ded9f848, type: 2}
+  - {fileID: 11400000, guid: 90efa5aa4af33724dad584dbefa743cd, type: 2}
+  - {fileID: 11400000, guid: c652c30b25a379f47a7391a4302fa538, type: 2}
+  - {fileID: 11400000, guid: 4746928d905a9b348ac7251f004a53c4, type: 2}
+  - {fileID: 11400000, guid: 1ca75b625b32ada42b0d41c612771f51, type: 2}
+  - {fileID: 11400000, guid: 0cde2f999008d104e849988a5fbf5c50, type: 2}
   minSize: 1
   maxSize: 5
+  lightColor: {r: 1, g: 1, b: 1, a: 1}

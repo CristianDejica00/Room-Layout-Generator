@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Pantry
   m_EditorClassIdentifier: 
   id: pantry
-  branches: []
+  branches:
+  - {fileID: 11400000, guid: 611e80715deb3f54e8e47fe363ce9cea, type: 2}
   minSize: 1
   maxSize: 3
+  lightColor: {r: 1, g: 0.9137255, b: 0.7607843, a: 1}

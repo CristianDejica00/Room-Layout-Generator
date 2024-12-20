@@ -16,6 +16,7 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject[] buildingBlocks;
     public GameObject layoutParent;
     public int levelSeed;
+    public Color[] areaTypeColors;
 
     public RoomType[] roomTypeList;
 
@@ -43,6 +44,7 @@ public class DungeonGenerator : MonoBehaviour
         BuildRooms();
         layoutParent.transform.position = new Vector3(-(mapSize*roomSize)/2f, 0, -(mapSize*roomSize)/2f);
         GetComponent<RoomGenerator>().DecorateRooms();
+        
     }
 
     void EmptyParent() {
@@ -497,6 +499,8 @@ public class DungeonGenerator : MonoBehaviour
                         }
                     }
                     GetRoomByPosition(randomPos).connected = true;
+                    GetRoomByPosition(randomPos).neighbors.Add(GetRoomByPosition(randomPos + new Vector2Int(-1, 0)));
+                    GetRoomByPosition(randomPos + new Vector2Int(-1, 0)).neighbors.Add(GetRoomByPosition(randomPos));
                 } else if(randomPos.x < mapSize-1 && GetRoomByPosition(randomPos + new Vector2Int(1, 0)).connected) {
                     foreach(Cell c in GetRoomByPosition(randomPos).cells) {
                         if(c.position == randomPos) {
@@ -509,6 +513,8 @@ public class DungeonGenerator : MonoBehaviour
                         }
                     }
                     GetRoomByPosition(randomPos).connected = true;
+                    GetRoomByPosition(randomPos).neighbors.Add(GetRoomByPosition(randomPos + new Vector2Int(1, 0)));
+                    GetRoomByPosition(randomPos + new Vector2Int(1, 0)).neighbors.Add(GetRoomByPosition(randomPos));
                 } else if(randomPos.y > 0 && GetRoomByPosition(randomPos + new Vector2Int(0, -1)).connected) {
                     foreach(Cell c in GetRoomByPosition(randomPos).cells) {
                         if(c.position == randomPos) {
@@ -521,6 +527,8 @@ public class DungeonGenerator : MonoBehaviour
                         }
                     }
                     GetRoomByPosition(randomPos).connected = true;
+                    GetRoomByPosition(randomPos).neighbors.Add(GetRoomByPosition(randomPos + new Vector2Int(0, -1)));
+                    GetRoomByPosition(randomPos + new Vector2Int(0, -1)).neighbors.Add(GetRoomByPosition(randomPos));
                 } else if(randomPos.y < mapSize-1 && GetRoomByPosition(randomPos + new Vector2Int(0, 1)).connected) {
                     foreach(Cell c in GetRoomByPosition(randomPos).cells) {
                         if(c.position == randomPos) {
@@ -533,6 +541,8 @@ public class DungeonGenerator : MonoBehaviour
                         }
                     }
                     GetRoomByPosition(randomPos).connected = true;
+                    GetRoomByPosition(randomPos).neighbors.Add(GetRoomByPosition(randomPos + new Vector2Int(0, 1)));
+                    GetRoomByPosition(randomPos + new Vector2Int(0, 1)).neighbors.Add(GetRoomByPosition(randomPos));
                 }
             }
         }
@@ -808,25 +818,32 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     void AssignRoomRole() {
-        foreach(Room r in roomList) {
-            var doorCount = 0;
-            foreach(Cell c in r.cells) {
-                doorCount += c.doors.Count;
-            }
-            r.doorCount = doorCount;
-            if(r.doorCount == 1) {
-                var foundLimit = 100;
-                var found = false;
-                while(foundLimit>0 && !found) {
-                    RoomType rt = GetDeadEndRoomTypeList()[Random.Range(0, GetDeadEndRoomTypeList().Count)];
-                    if(r.cells.Count >= rt.minSize && r.cells.Count <= rt.maxSize) {
-                        found = true;
-                        r.type = rt;
+
+        List<string> cornerTypes = new List<string>{"food", "tech", "medical", "general"};
+
+        GetRoomByPosition(new Vector2Int(1, 1)).areaType = cornerTypes[Random.Range(0, cornerTypes.Count)];
+        cornerTypes.Remove(GetRoomByPosition(new Vector2Int(1, 1)).areaType);
+
+        GetRoomByPosition(new Vector2Int(1, (mapSize-2))).areaType = cornerTypes[Random.Range(0, cornerTypes.Count)];
+        cornerTypes.Remove(GetRoomByPosition(new Vector2Int(1, (mapSize-2))).areaType);
+
+        GetRoomByPosition(new Vector2Int((mapSize-2), 1)).areaType = cornerTypes[Random.Range(0, cornerTypes.Count)];
+        cornerTypes.Remove(GetRoomByPosition(new Vector2Int((mapSize-2), 1)).areaType);
+
+        GetRoomByPosition(new Vector2Int((mapSize-2), (mapSize-2))).areaType = cornerTypes[Random.Range(0, cornerTypes.Count)];
+
+
+        var areaTypeFound = false;
+        while(!areaTypeFound) {
+            areaTypeFound = true;
+            foreach(Room r in roomList) {
+                if(r.areaType == "") { 
+                    areaTypeFound = false;
+                    foreach(Room n in r.neighbors) {
+                        if(n.areaType != "") {
+                            r.areaType = n.areaType;
+                        }
                     }
-                    foundLimit -= 1;
-                }
-                if(!found) {
-                    r.type = GetRoomTypeById("storage_room");
                 }
             }
         }
@@ -878,9 +895,13 @@ public class Room {
     public int doorCount;
     public bool connected;
     public RoomType type;
+    public List<Room> neighbors;
+    public string areaType;
 
     public Room(int i) {
         id = i;
         cells = new List<Cell>();
+        neighbors = new List<Room>();
+        areaType = "";
     }
 }

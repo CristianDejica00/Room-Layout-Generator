@@ -28,6 +28,105 @@ public class RoomGenerator : MonoBehaviour {
     void GenerateObjectPlacement() {
         for(int x=0;x<mapSize;x++) {
             for(int y=0;y<mapSize;y++) {
+                float xCoord = (float)(x+GetComponent<DungeonGenerator>().levelSeed) / (float)mapSize * 30f;
+                float yCoord = (float)(y+GetComponent<DungeonGenerator>().levelSeed) / (float)mapSize * 30f;
+                float sample = Mathf.PerlinNoise(xCoord, yCoord);
+
+                if(sample >= 0.5f) {
+                    objectMap[x, y] = 1;
+                }
+                /*if(!(x>=2 && x<=mapSize-3 && y>=2 && y<=mapSize-3) || 
+                ((x>=2 && x<=mapSize-3 && y>=2 && y<=mapSize-3) && (
+                    (dungeonMap[x, y] != dungeonMap[x-1, y] ||
+                    dungeonMap[x, y] != dungeonMap[x+1, y] ||
+                    dungeonMap[x, y] != dungeonMap[x, y-1] ||
+                    dungeonMap[x, y] != dungeonMap[x, y+1] ||
+                    dungeonMap[x-1, y] != dungeonMap[x-2, y] ||
+                    dungeonMap[x+1, y] != dungeonMap[x+2, y] ||
+                    dungeonMap[x, y-1] != dungeonMap[x, y-2] ||
+                    dungeonMap[x, y+1] != dungeonMap[x, y+2])
+                ))) {
+                    float xCoord = (float)(x+GetComponent<DungeonGenerator>().levelSeed) / (float)mapSize * 30f;
+                    float yCoord = (float)(y+GetComponent<DungeonGenerator>().levelSeed) / (float)mapSize * 30f;
+                    float sample = Mathf.PerlinNoise(xCoord, yCoord);
+
+                    if(sample >= 0.5f) {
+                        objectMap[x, y] = 1;
+                    }
+                }*/
+            }
+        }
+
+        foreach(Room r in GetComponent<DungeonGenerator>().roomList) {
+            foreach(Cell c in r.cells) {
+                for(int x=c.position.x*roomSize;x<c.position.x*roomSize + roomSize;x++) {
+                    for(int y=c.position.y*roomSize;y<c.position.y*roomSize + roomSize;y++) {
+                        if(c.doors.Contains(0) && y==c.position.y*roomSize + roomSize-1 && x==c.position.x*roomSize+roomSize/2) {
+                            objectMap[x, y] = 0;
+                            objectMap[x, y-1] = 0;
+                        }
+                        if(c.doors.Contains(6) && y==c.position.y*roomSize && x==c.position.x*roomSize+roomSize/2) {
+                            objectMap[x, y] = 0;
+                            objectMap[x, y+1] = 0;
+                        }
+                        if(c.doors.Contains(9) && y==c.position.y*roomSize+roomSize/2 && x==c.position.x*roomSize) {
+                            objectMap[x, y] = 0;
+                            objectMap[x+1, y] = 0;
+                        }
+                        if(c.doors.Contains(3) && y==c.position.y*roomSize+roomSize/2 && x==c.position.x*roomSize + roomSize-1) {
+                            objectMap[x, y] = 0;
+                            objectMap[x-1, y] = 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        foreach(Room r in GetComponent<DungeonGenerator>().roomList) {
+            foreach(Cell c in r.cells) {
+                objectMap[c.position.x*roomSize + roomSize/2, c.position.y*roomSize + roomSize/2] = 3;
+            }
+        }
+
+        var filled = false;
+        while(!filled) {
+            filled = true;
+            for(int x=1;x<mapSize-1;x++) {
+                for(int y=1;y<mapSize-1;y++) {
+                    if(objectMap[x, y] == 3) {
+                        if(dungeonMap[x, y] == dungeonMap[x-1, y] && objectMap[x-1, y] == 0) {
+                            objectMap[x-1, y] = 3;
+                            filled = false;
+                        }
+                        if(dungeonMap[x, y] == dungeonMap[x+1, y] && objectMap[x+1, y] == 0) {
+                            objectMap[x+1, y] = 3;
+                            filled = false;
+                        }
+                        if(dungeonMap[x, y] == dungeonMap[x, y-1] && objectMap[x, y-1] == 0) {
+                            objectMap[x, y-1] = 3;
+                            filled = false;
+                        }
+                        if(dungeonMap[x, y] == dungeonMap[x, y+1] && objectMap[x, y+1] == 0) {
+                            objectMap[x, y+1] = 3;
+                            filled = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        for(int x=0;x<mapSize;x++) {
+            for(int y=0;y<mapSize;y++) {
+                if(objectMap[x, y] == 0) objectMap[x, y] = 3;
+                else if(objectMap[x, y] == 1) objectMap[x, y] = 3;
+                else if(objectMap[x, y] == 3) objectMap[x, y] = 0;
+            }
+        }
+
+
+
+        /*for(int x=0;x<mapSize;x++) {
+            for(int y=0;y<mapSize;y++) {
                 if(!(x>0 && y>0 && x<mapSize-1 && y<mapSize-1) || ((x>0 && y>0 && x<mapSize-1 && y<mapSize-1) &&
                 (dungeonMap[x, y] != dungeonMap[x-1, y] ||
                 dungeonMap[x, y] != dungeonMap[x, y-1] ||
@@ -276,7 +375,7 @@ public class RoomGenerator : MonoBehaviour {
                     }
                 //}
             }
-        }
+        }*/
 
     }
 
@@ -306,9 +405,11 @@ public class RoomGenerator : MonoBehaviour {
 
         for(int x=0;x<mapSize;x++) {
             for(int y=0;y<mapSize;y++) {
+                //Color color = GetColorFromInt(dungeonMap[x, y]);
                 Color color = GetColorFromInt(dungeonMap[x, y]);
-                if(objectMap[x, y] == 1) color = Color.black;
-                if(objectMap[x, y] == 2) color = Color.gray;
+                color = new Color(color.r,color.r,color.r);
+                if(objectMap[x, y] == 1) color = Color.blue;
+                if(objectMap[x, y] == 2) color = Color.black;
                 if(objectMap[x, y] == 3) color = Color.red;
                 texture.SetPixel(x, y, color);
             }

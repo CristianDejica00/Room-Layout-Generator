@@ -20,25 +20,25 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_AmbientMode: 3
+  m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
-  m_DefaultReflectionMode: 0
+  m_DefaultReflectionMode: 1
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028481, g: 0.22571659, b: 0.3069244, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -348,13 +348,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38185263, y: -0.38835603, z: 0.18109335, w: 0.81888545}
+  m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.70710784}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -50.745, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,7 +530,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 800}
+  m_SizeDelta: {x: 980, y: 980}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1560893102
 MonoBehaviour:
@@ -644,7 +644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapSize: 10
-  roomSize: 7
+  roomSize: 10
   buildingBlocks:
   - {fileID: 919132149155446097, guid: 3a56393d63359814190fc1d7be835afa, type: 3}
   - {fileID: 919132149155446097, guid: bec2d0b4b1227c346adfc861f94d4a8c, type: 3}
@@ -654,27 +654,33 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 26338cc648eb8ac469c1e7832370d0a9, type: 3}
   layoutParent: {fileID: 1726834351}
   levelSeed: 486
+  areaTypeColors:
+  - {r: 1, g: 0.9137255, b: 0.7607843, a: 1}
+  - {r: 1, g: 0.72156864, b: 0.4392157, a: 1}
+  - {r: 0.8235294, g: 0.9843137, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
   roomTypeList:
-  - {fileID: 11400000, guid: a5a5f26f0d1f1424fb56d1fd64aac2ba, type: 2}
-  - {fileID: 11400000, guid: 4d71cf650a5c2e74c934a1e264480e30, type: 2}
-  - {fileID: 11400000, guid: 8611ba3f5a4d6bf49ae1096ed581e71c, type: 2}
-  - {fileID: 11400000, guid: 36aceb38d8fc8ad439ec67610cbbe53f, type: 2}
-  - {fileID: 11400000, guid: 235e0862b60198d4fbf62b65133b15bd, type: 2}
-  - {fileID: 11400000, guid: 67adbe0501a17bf42876f4bd17d68c7b, type: 2}
-  - {fileID: 11400000, guid: 82c75a9f0a67c2843aca14c86896a366, type: 2}
-  - {fileID: 11400000, guid: 3572af541657a0e43acd54812a17327e, type: 2}
-  - {fileID: 11400000, guid: 67bd314d20e00a6449704ed91f46837f, type: 2}
+  - {fileID: 11400000, guid: c987317ab602c5747a77366b8611b592, type: 2}
+  - {fileID: 11400000, guid: 4746928d905a9b348ac7251f004a53c4, type: 2}
+  - {fileID: 11400000, guid: c652c30b25a379f47a7391a4302fa538, type: 2}
+  - {fileID: 11400000, guid: afe8c049965f5eb47a30be0c45e6324d, type: 2}
+  - {fileID: 11400000, guid: 98ded45039a34bf4fb4116cc05711170, type: 2}
+  - {fileID: 11400000, guid: 445d193d02963a843bb00658a5d02f18, type: 2}
+  - {fileID: 11400000, guid: 0cde2f999008d104e849988a5fbf5c50, type: 2}
+  - {fileID: 11400000, guid: 611e80715deb3f54e8e47fe363ce9cea, type: 2}
+  - {fileID: 11400000, guid: 8b27296734261f6488351bb2dc33d1cb, type: 2}
+  - {fileID: 11400000, guid: 915ea746108969b48b8d90c029490d7f, type: 2}
   - {fileID: 11400000, guid: 7d79ec6d96a8f5e43b7e0f879a17a60d, type: 2}
-  - {fileID: 11400000, guid: 4ae985452c39e6647809da86c1b787a8, type: 2}
-  - {fileID: 11400000, guid: b47444460ccc78249a88f1ab96ddc7ce, type: 2}
-  - {fileID: 11400000, guid: ce34eecce62b95645b6d08bb97f8e3ce, type: 2}
-  - {fileID: 11400000, guid: 70faa2e14a4347041b78bf2ec2ab9d5d, type: 2}
-  - {fileID: 11400000, guid: a095904487d94c24fa2cb6680e0f65d5, type: 2}
-  - {fileID: 11400000, guid: 1c41d5b820601df40878f08c0fcffe3c, type: 2}
-  - {fileID: 11400000, guid: c7a9b73170b583c42a59c1b83f1c291f, type: 2}
-  - {fileID: 11400000, guid: 35d21ad16f472df429672f147d04c01f, type: 2}
-  - {fileID: 11400000, guid: 9aca38bf6629bb44dbedc27493a85a1f, type: 2}
-  - {fileID: 11400000, guid: 219aebd56c6cde1428cdc1d909e8ac8d, type: 2}
+  - {fileID: 11400000, guid: dd0a897181aea904f8da9bf10ff7ea14, type: 2}
+  - {fileID: 11400000, guid: 15dd78e892c695c41bd60f8c6d4d2e9d, type: 2}
+  - {fileID: 11400000, guid: 90efa5aa4af33724dad584dbefa743cd, type: 2}
+  - {fileID: 11400000, guid: 5c6796315c75070408b3480dbc3c117d, type: 2}
+  - {fileID: 11400000, guid: 05896d782719c5644a0bdb1253f00851, type: 2}
+  - {fileID: 11400000, guid: 64f6251916a2804478982cbd5819b301, type: 2}
+  - {fileID: 11400000, guid: 76bbb419761bc8f4f8754741e4f732f9, type: 2}
+  - {fileID: 11400000, guid: 68d34e631ab2e2a45a8360c15e2f792d, type: 2}
+  - {fileID: 11400000, guid: bf47e589320aa1040bdd8b77ded9f848, type: 2}
+  - {fileID: 11400000, guid: 1ca75b625b32ada42b0d41c612771f51, type: 2}
 --- !u!114 &1742905153
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Kitchen
   m_EditorClassIdentifier: 
   id: kitchen
-  branches:
-  - {fileID: 11400000, guid: 70faa2e14a4347041b78bf2ec2ab9d5d, type: 2}
+  branches: []
   minSize: 1
   maxSize: 3
+  lightColor: {r: 1, g: 0.9137255, b: 0.7607843, a: 1}
