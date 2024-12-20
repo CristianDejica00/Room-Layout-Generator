@@ -28,14 +28,7 @@ public class RoomGenerator : MonoBehaviour {
     void GenerateObjectPlacement() {
         for(int x=0;x<mapSize;x++) {
             for(int y=0;y<mapSize;y++) {
-                float xCoord = (float)(x+GetComponent<DungeonGenerator>().levelSeed) / (float)mapSize * 30f;
-                float yCoord = (float)(y+GetComponent<DungeonGenerator>().levelSeed) / (float)mapSize * 30f;
-                float sample = Mathf.PerlinNoise(xCoord, yCoord);
-
-                if(sample >= 0.5f) {
-                    objectMap[x, y] = 1;
-                }
-                /*if(!(x>=2 && x<=mapSize-3 && y>=2 && y<=mapSize-3) || 
+                if(!(x>=2 && x<=mapSize-3 && y>=2 && y<=mapSize-3) || 
                 ((x>=2 && x<=mapSize-3 && y>=2 && y<=mapSize-3) && (
                     (dungeonMap[x, y] != dungeonMap[x-1, y] ||
                     dungeonMap[x, y] != dungeonMap[x+1, y] ||
@@ -53,7 +46,7 @@ public class RoomGenerator : MonoBehaviour {
                     if(sample >= 0.5f) {
                         objectMap[x, y] = 1;
                     }
-                }*/
+                }
             }
         }
 
