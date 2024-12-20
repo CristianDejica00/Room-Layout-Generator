@@ -14,4 +14,4 @@ Now, with all rooms interconnected, we can start thinking about room contents. I
 
 I chose to use perlin noise to generate the placement array for the furniture. For any coordinate (x, y) that is at most 2 units from any wall (a padding of 2 for each room), if the perlin noise value returns a value that is greater or equal to 0.5, I mark that coordinate as having furniture on it.
 
-![](https://github.com/CristianDejica00/Room-Layout-Generator/blob/main/GitPres/Pres_04.gif)
+![](https://github.com/CristianDejica00/Room-Layout-Generator/blob/main/GitPres/Pres_04.png)
