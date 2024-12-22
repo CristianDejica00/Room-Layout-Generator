@@ -14,4 +14,8 @@ Now, with all rooms interconnected, we can start thinking about room contents. I
 
 To determine the furniture placement, I spawned rectangles of width and height between 1 and 3 near walls. I did this up until the occupiable space is at 40% capacity. Afterwards, I cleared the doors by erasing rectangles that stand in the way of doorways and I filled in the spaces that would be unreachable (for example corners that have furniture around them).
 
-![](https://github.com/CristianDejica00/Room-Layout-Generator/blob/main/GitPres/Pres_4.gif)
+![](https://github.com/CristianDejica00/Room-Layout-Generator/blob/main/GitPres/Pres_04.gif)
+
+Afterwards, for the furniture found in the middle of rooms, I drew two types of areas: dividing walls and rectangles. To draw the dividing walls, I went from cell to cell and, after calculating the spawn chance, connected one cell to the other with a line that connects their centers. The rectangles were spawned in the remaining cells, unnocupied by said lines, after calculating the spawn chance.
+
+![](https://github.com/CristianDejica00/Room-Layout-Generator/blob/main/GitPres/Pres_05.gif)
