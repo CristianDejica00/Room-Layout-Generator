@@ -12,6 +12,6 @@ After having a complete collection of rooms, we choose a starting room, marking 
 
 Now, with all rooms interconnected, we can start thinking about room contents. It is worth mentioning that the array of cells I used at the beginning has a certain size (called mapSize), and I used another variable (called roomSize) to upscale the array. So if the mapSize is 10, and the roomSize is 9, the final layout will consist of 90x90 units.
 
-I chose to use perlin noise to generate the placement array for the furniture. For any coordinate (x, y) that is at most 2 units from any wall (a padding of 2 for each room), if the perlin noise value returns a value that is greater or equal to 0.5, I mark that coordinate as having furniture on it.
+To determine the furniture placement, I spawned rectangles of width and height between 1 and 3 near walls. I did this up until the occupiable space is at 40% capacity. Afterwards, I cleared the doors by erasing rectangles that stand in the way of doorways and I filled in the spaces that would be unreachable (for example corners that have furniture around them).
 
-![](https://github.com/CristianDejica00/Room-Layout-Generator/blob/main/GitPres/Pres_04.png)
+![](https://github.com/CristianDejica00/Room-Layout-Generator/blob/main/GitPres/Pres_04.gif)
