@@ -10,6 +10,7 @@ public class DungeonGenerator : MonoBehaviour
     private int publicMapSize;
     public int roomSize;
     public int[,] dungeonMap;
+    public int[,] wallMap;
     public List<Room> roomList;
     public List<Cell> cellList;
     Vector2Int startingRoom;
@@ -41,10 +42,63 @@ public class DungeonGenerator : MonoBehaviour
         ConnectRooms();
         UpscaleDungeon();
         AssignRoomRole();
+        SetWalls();
         BuildRooms();
         layoutParent.transform.position = new Vector3(-(mapSize*roomSize)/2f, 0, -(mapSize*roomSize)/2f);
         GetComponent<RoomGenerator>().DecorateRooms();
         
+    }
+
+    void SetWalls() {
+        for(int x=0;x<mapSize*roomSize;x++) {
+            for(int y=0;y<mapSize*roomSize;y++) {
+                if(x==0 || x==mapSize*roomSize-1 || y==0 || y==mapSize*roomSize-1) {
+                    wallMap[x, y] = 1;
+                } else {
+                    if(dungeonMap[x, y] != dungeonMap[x-1, y-1] ||
+                    dungeonMap[x, y] != dungeonMap[x-1, y] ||
+                    dungeonMap[x, y] != dungeonMap[x-1, y+1] ||
+                    dungeonMap[x, y] != dungeonMap[x, y-1] ||
+                    dungeonMap[x, y] != dungeonMap[x, y+1] ||
+                    dungeonMap[x, y] != dungeonMap[x+1, y-1] ||
+                    dungeonMap[x, y] != dungeonMap[x+1, y] ||
+                    dungeonMap[x, y] != dungeonMap[x+1, y+1]) {
+                        wallMap[x, y] = 1;
+                    }
+                }
+            }
+        }
+
+        foreach(Room r in roomList) {
+            foreach(Cell c in r.cells) {
+                for(int x=c.position.x*roomSize;x<c.position.x*roomSize + roomSize;x++) {
+                    for(int y=c.position.y*roomSize;y<c.position.y*roomSize + roomSize;y++) {
+                        if(c.doors.Contains(0) && y==c.position.y*roomSize + roomSize-1 && x==c.position.x*roomSize+roomSize/2) {
+                            wallMap[x, y] = 2;
+                        }
+                        if(c.doors.Contains(6) && y==c.position.y*roomSize && x==c.position.x*roomSize+roomSize/2) {
+                            wallMap[x, y] = 2;
+                        }
+                        if(c.doors.Contains(9) && y==c.position.y*roomSize+roomSize/2 && x==c.position.x*roomSize) {
+                            wallMap[x, y] = 2;
+                        }
+                        if(c.doors.Contains(3) && y==c.position.y*roomSize+roomSize/2 && x==c.position.x*roomSize + roomSize-1) {
+                            wallMap[x, y] = 2;
+                        }
+                    }
+                }
+            }
+        }
+
+        for(int x=0;x<mapSize*roomSize;x++) {
+            for(int y=0;y<mapSize*roomSize;y++) {
+                if(wallMap[x, y] == 1) {
+                    dungeonMap[x, y] = -1;
+                } else if(wallMap[x, y] == 2) {
+                    dungeonMap[x, y] = -2;
+                }
+            }
+        }
     }
 
     void EmptyParent() {
@@ -549,6 +603,7 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     void InitializeRooms() {
+        wallMap = new int[mapSize*roomSize,mapSize*roomSize];
         dungeonMap = new int[mapSize, mapSize];
         roomList = new List<Room>();
         cellList = new List<Cell>();

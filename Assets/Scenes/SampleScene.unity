@@ -644,7 +644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapSize: 10
-  roomSize: 10
+  roomSize: 11
   buildingBlocks:
   - {fileID: 919132149155446097, guid: 3a56393d63359814190fc1d7be835afa, type: 3}
   - {fileID: 919132149155446097, guid: bec2d0b4b1227c346adfc861f94d4a8c, type: 3}
@@ -697,6 +697,7 @@ MonoBehaviour:
   mapSize: 0
   roomSize: 0
   mapPreview: {fileID: 1560893100}
+  furniturePercentage: 0
 --- !u!1 &1975240791
 GameObject:
   m_ObjectHideFlags: 0
